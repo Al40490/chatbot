@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --app-bg: #f6f6f4;
+  --surface: #ffffff;
+  --surface-muted: #f0f0ee;
+  --surface-raised: #fbfbfa;
+  --border-soft: #dfdfdc;
+  --border-strong: #c9c9c4;
+  --text-main: #18181b;
+  --text-muted: #5f605c;
+  --text-soft: #868782;
+  --accent: #27272a;
+  --accent-hover: #18181b;
+  --accent-soft: #ececea;
+  --warning: #b7791f;
+  --danger: #c2413b;
+  --shadow-soft: 0 12px 30px rgba(24, 24, 27, 0.08);
+}
+
+@theme inline {
+  --color-background: var(--app-bg);
+  --color-foreground: var(--text-main);
+  --font-sans: var(--font-inter), "Segoe UI", Arial, sans-serif;
+  --font-mono: Consolas, "Liberation Mono", monospace;
+}
+
+.dark {
+  --app-bg: #050505;
+  --surface: #0f0f10;
+  --surface-muted: #18181b;
+  --surface-raised: #131315;
+  --border-soft: #2f2b24;
+  --border-strong: #5b4930;
+  --text-main: #fffaf0;
+  --text-muted: #e7ddca;
+  --text-soft: #cbbda6;
+  --accent: #a86f13;
+  --accent-hover: #c18421;
+  --accent-soft: rgba(192, 132, 33, 0.18);
+  --warning: #f1b75d;
+  --danger: #f87171;
+  --shadow-soft: 0 18px 38px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background: var(--app-bg);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: 0;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Custom modern scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--text-soft) 38%, transparent);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--text-soft) 55%, transparent);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 41, 59, 0.7);
+}
+
+/* Keyframes and Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes loginImageIn {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes loginFormIn {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes submitLift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes assistantPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pop-in {
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.login-image-panel img {
+  animation: loginImageIn 850ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.login-form-panel {
+  animation: loginFormIn 620ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+}
+
+.login-submit-button:hover {
+  animation: submitLift 160ms ease-out forwards;
+}
+
+.assistant-focus {
+  position: relative;
+}
+
+.assistant-focus::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: 0.875rem;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 20%, var(--surface)));
+  opacity: 0.75;
+}
+
+.assistant-focus-icon {
+  animation: assistantPulse 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* Hide native scrollbar but allow scrolling */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
